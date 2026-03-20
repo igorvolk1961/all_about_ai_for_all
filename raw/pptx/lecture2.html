@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все про ИИ за 90 минут. Часть 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .presentation {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .slide {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            aspect-ratio: 16/9;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .slide-title {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .slide-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .two-columns {
+            display: flex;
+            gap: 30px;
+            flex: 1;
+        }
+
+        .column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section-header {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .green-bg { background: #10b981; color: white; }
+        .orange-bg { background: #f59e0b; color: white; }
+        .blue-bg { background: #3b82f6; color: white; }
+        .purple-bg { background: #8b5cf6; color: white; }
+        .red-bg { background: #ef4444; color: white; }
+        .yellow-bg { background: #fbbf24; color: white; }
+
+        .content-box {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .content-box h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .content-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-box li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .content-box li:before {
+            content: "•";
+            color: #3b82f6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        .check-list li:before {
+            content: "✓";
+            color: #10b981;
+        }
+
+        .cross-list li:before {
+            content: "✗";
+            color: #ef4444;
+        }
+
+        .warning-list li:before {
+            content: "⚠";
+            color: #f59e0b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #f1f5f9;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 2px;
+        }
+
+        .badge-yes { background: #10b981; color: white; }
+        .badge-no { background: #ef4444; color: white; }
+        .badge-warning { background: #f59e0b; color: white; }
+
+        .level-box {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .level-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .level-content h3 {
+            color: #1e3c72;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .level-content p {
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .footer-note {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .step-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            color: #1e3c72;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .step-content ul {
+            list-style: none;
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card h4 {
+            color: #1e3c72;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .card p {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .highlight-box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .slide { 
+                box-shadow: none; 
+                margin-bottom: 0;
+                page-break-after: always;
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Слайд 1: Титульный -->
+        <div class="slide">
+            <div class="slide-title" style="font-size: 36px;">Все про ИИ за 90 минут. Часть 2</div>
+            <div class="slide-subtitle" style="font-size: 20px;">От теории к практике</div>
+            
+            <div class="two-columns">
+                <div class="column">
+                    <div class="section-header green-bg">ЧАСТЬ 1 НАПОМИНАНИЕ</div>
+                    <div class="content-box">
+                        <ul class="check-list">
+                            <li>ИИ — это не магия, а математика</li>
+                            <li>Обучение — подбор весов методом проб и ошибок</li>
+                            <li>Инференс — применение готовой модели</li>
+                            <li>LLM работают с токенами и эмбеддингами</li>
+                            <li>В основе — Трансформер и механизм внимания Q K V</li>
+                            <li>Модель не знает правду — а предсказывает вероятности</li>
+                            <li>Три типа задач: регрессия, классификация, поиск по смыслу</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="section-header orange-bg">ПЛАН ЧАСТИ 2</div>
+                    <div class="content-box">
+                        <ol style="padding-left: 20px; font-size: 15px; line-height: 2;">
+                            <li>Способы доступа к ИИ</li>
+                            <li>Безопасность и конфиденциальность</li>
+                            <li>Экономика внедрения</li>
+                            <li>Четыре уровня работы с информацией</li>
+                            <li>Сравнение чатов: базовые функции</li>
+                            <li>Сравнение чатов: продвинутые возможности</li>
+                            <li>Движки инференса</li>
+                            <li>Промпты: как писать, чтобы работало</li>
+                            <li>Опасности автономных агентов</li>
+                            <li>Чек-лист: с чего начать</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 2: Типы доступа -->
+        <div class="slide">
+            <div class="slide-title">Типы доступа к ИИ</div>
+            <div class="slide-subtitle">Как попасть в мир ИИ: от браузера до своего сервера</div>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px; flex: 1;">
+                <div class="section-header green-bg center-text">БЕСПЛАТНЫЕ СПОСОБЫ</div>
+                <div class="two-columns">
+                    <div class="content-box">
+                        <h3>🌐 Браузер и смартфон</h3>
+                        <ul>
+                            <li>Чат-интерфейсы: Гигачат, Алиса, DeepSeek, Qwen, Kimi</li>
+                            <li>Не требует установки, работает сразу</li>
+                            <li>Ограничения: функционал, лимиты, зависимость от интернета</li>
+                        </ul>
+                    </div>
+                    <div class="content-box">
+                        <h3>💻 Ollama на ноутбуке</h3>
+                        <ul>
+                            <li>Запуск открытых моделей локально</li>
+                            <li>Полная приватность, нет зависимости</li>
+                            <li>Ограничения: нужны ресурсы (ОЗУ/GPU), только открытые модели</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-header orange-bg center-text">ОПЛАТА ЧЕРЕЗ API</div>
+                <div class="two-columns">
+                    <div class="content-box">
+                        <h3>☁️ Облачный API провайдер</h3>
+                        <ul>
+                            <li>Платите за токены: вход/выход</li>
+                            <li>Примеры: российские и международные платформы</li>
+                            <li>Плюсы: нет администрирования, масштабируется</li>
+                            <li>Минусы: данные во внешнем облаке</li>
+                        </ul>
+                    </div>
+                    <div class="content-box">
+                        <h3>🖥️ Аренда GPU облачный сервер</h3>
+                        <ul>
+                            <li>Платите за время работы видеокарты</li>
+                            <li>Примеры: SberCloud, Yandex Cloud, Selectel, Timeweb</li>
+                            <li>Плюсы: контроль над моделью и данными</li>
+                            <li>Минусы: платите за простой, нужны навыки развёртывания</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-header blue-bg center-text">СВОЙ СЕРВЕР ЛОКАЛЬНО</div>
+                <div class="content-box">
+                    <ul>
+                        <li><strong>Покупка железа + эксплуатация</strong></li>
+                        <li>Плюсы: максимальный контроль, безопасность, низкая себестоимость при высокой нагрузке</li>
+                        <li>Минусы: высокие стартовые вложения, нужна инфраструктура и администрирование</li>
+                    </ul>
+                </div>
+
+                <div class="section-header purple-bg center-text">ПРОСТАЯ СХЕМА ВЫБОРА</div>
+                <div class="content-box center-text" style="font-size: 14px; line-height: 1.8;">
+                    Хотите попробовать → <strong>браузер/приложение</strong><br>
+                    Нужна приватность без вложений → <strong>Ollama</strong><br>
+                    Пилот / нерегулярная нагрузка → <strong>облачный API</strong><br>
+                    Регулярная нагрузка + контроль → <strong>аренда GPU</strong><br>
+                    Высокая нагрузка + строгая безопасность → <strong>свой сервер</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 3: Безопасность -->
+        <div class="slide">
+            <div class="slide-title">Безопасность и конфиденциальность</div>
+            <div class="slide-subtitle">Что можно отправлять ИИ — а что нельзя</div>
+            
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+                <div class="section-header red-bg center-text">ТРИ УРОВНЯ ДАННЫХ</div>
+                <div class="grid-3">
+                    <div class="content-box" style="border-left-color: #10b981; background: #d1fae5;">
+                        <h3 class="center-text" style="background: #10b981; color: white; padding: 8px; border-radius: 5px; margin: -15px -15px 10px -15px;">Публичные</h3>
+                        <ul>
+                            <li>Новости, открытые статьи, публичные данные</li>
+                            <li><strong>Можно отправлять в любые чаты</strong></li>
+                        </ul>
+                    </div>
+                    <div class="content-box" style="border-left-color: #f59e0b; background: #fef3c7;">
+                        <h3 class="center-text" style="background: #f59e0b; color: white; padding: 8px; border-radius: 5px; margin: -15px -15px 10px -15px;">Внутренние но не критичные</h3>
+                        <ul>
+                            <li>Черновики, идеи, неперсональные рабочие заметки</li>
+                            <li><strong>Только в чаты с политикой «данные не используются для обучения»</strong></li>
+                        </ul>
+                    </div>
+                    <div class="content-box" style="border-left-color: #ef4444; background: #fee2e2;">
+                        <h3 class="center-text" style="background: #ef4444; color: white; padding: 8px; border-radius: 5px; margin: -15px -15px 10px -15px;">Конфиденциальные персональные</h3>
+                        <ul>
+                            <li>Персданные (152-ФЗ), договоры, финансы, пароли, код, стратегии</li>
+                            <li><strong>Только локальное развёртывание (Ollama, свой сервер) или российские облака</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-header blue-bg center-text">ЧТО ПРОИСХОДИТ С ВАШИМИ ДАННЫМИ</div>
+                <div class="content-box">
+                    <ul class="warning-list">
+                        <li><strong>Бесплатные чаты:</strong> часто используют диалоги для дообучения моделей</li>
+                        <li><strong>Платные тарифы:</strong> обычно исключают данные из обучения (читайте Terms!)</li>
+                        <li><strong>Локально:</strong> данные никуда не уходят</li>
+                    </ul>
+                    <div class="highlight-box" style="margin-top: 10px; padding: 10px; background: #fef3c7; color: #92400e;">
+                        <strong>Правило:</strong> Если не уверены — не отправляйте. Или анонимизируйте.
+                    </div>
+                </div>
+
+                <div class="section-header blue-bg center-text">🇷 ОСОБЕННОСТИ В РФ</div>
+                <div class="content-box">
+                    <ul class="check-list">
+                        <li><strong>152-ФЗ:</strong> персональные данные должны обрабатываться на территории РФ</li>
+                        <li><strong>Санкции:</strong> доступ к некоторым моделям только через посредников или VPN</li>
+                        <li><strong>Российские платформы:</strong> Гигачат, Алиса, SberCloud — соответствуют требованиям, но функционал может отличаться</li>
+                    </ul>
+                </div>
+
+                <div class="footer-note">
+                    <strong>Практический совет:</strong> Создайте внутренний чек-лист:<br>
+                    ✓ Это публичные данные → можно в любой чат<br>
+                    ✓ Это внутренние но не персданные → только чаты с политикой «не обучать»<br>
+                    ✓ Это конфиденциально/персданные → только локально или российское облако с соглашением
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 4: Экономика -->
+        <div class="slide">
+            <div class="slide-title">Экономика внедрения ИИ</div>
+            <div class="slide-subtitle">Сколько стоит использовать ИИ</div>
+            
+            <div class="grid-3" style="flex: 1;">
+                <div class="content-box">
+                    <h3 class="center-text" style="background: #dbeafe; padding: 10px; border-radius: 5px; margin: -15px -15px 15px -15px;">
+                        💰 МОДЕЛЬ 1: Оплата за токены API
+                    </h3>
+                    <ul style="font-size: 13px; line-height: 1.8;">
+                        <li><strong>Вход:</strong> ~$0.1-0.5 за 1 млн токенов</li>
+                        <li><strong>Выход:</strong> ~$0.2-2.0 за 1 млн токенов</li>
+                        <li><strong>Пример:</strong> 1000 запросов/день × 2000 токенов = ~$10-50/месяц</li>
+                    </ul>
+                    <ul class="check-list" style="margin-top: 10px;">
+                        <li><strong>Плюсы:</strong> Нет вложений, масштабируется</li>
+                    </ul>
+                    <ul class="cross-list">
+                        <li><strong>Минусы:</strong> Данные во внешнем облаке, цена растёт</li>
+                    </ul>
+                    <div class="highlight-box" style="margin-top: 15px; font-size: 12px;">
+                        Для пилотов, нерегулярной нагрузки
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 class="center-text" style="background: #dbeafe; padding: 10px; border-radius: 5px; margin: -15px -15px 15px -15px;">
+                        💰 МОДЕЛЬ 2: Аренда GPU (облако)
+                    </h3>
+                    <ul style="font-size: 13px; line-height: 1.8;">
+                        <li><strong>RTX 4090:</strong> ~₽50-150/час</li>
+                        <li><strong>A100/H100:</strong> ~₽300-800/час</li>
+                        <li><strong>Российские платформы:</strong> SberCloud, Yandex Cloud, Selectel</li>
+                    </ul>
+                    <ul class="check-list" style="margin-top: 10px;">
+                        <li><strong>Плюсы:</strong> Контроль над моделью и данными</li>
+                    </ul>
+                    <ul class="cross-list">
+                        <li><strong>Минусы:</strong> Платите за простой, нужны навыки</li>
+                    </ul>
+                    <div class="highlight-box" style="margin-top: 15px; font-size: 12px;">
+                        Для регулярной нагрузки >500 запросов/день, требования к конфиденциальности
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 class="center-text" style="background: #dbeafe; padding: 10px; border-radius: 5px; margin: -15px -15px 15px -15px;">
+                        💰 МОДЕЛЬ 3: Своё железо (CapEx)
+                    </h3>
+                    <ul style="font-size: 13px; line-height: 1.8;">
+                        <li><strong>Железо:</strong> RTX 4090 ~₽150-200 тыс., сервер 4×GPU ~₽1.5-3 млн</li>
+                        <li><strong>В год:</strong> электричество ₽30-100 тыс., администрирование 0.2-1.0 FTE</li>
+                    </ul>
+                    <ul class="check-list" style="margin-top: 10px;">
+                        <li><strong>Плюсы:</strong> Максимальный контроль, безопасность</li>
+                    </ul>
+                    <ul class="cross-list">
+                        <li><strong>Минусы:</strong> Высокие вложения, инфраструктура</li>
+                    </ul>
+                    <div class="highlight-box" style="margin-top: 15px; font-size: 12px;">
+                        Для высокой нагрузки >2000 запросов/день, строгие требования к локализации
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 15px;">
+                <h3>Простая формула выбора</h3>
+                <div style="font-size: 16px; line-height: 2;">
+                    <strong>Меньше 100 запросов/день</strong> → Облачный API (токены)<br>
+                    <strong>100-1000 запросов/день</strong> → Аренда GPU или гибридное решение<br>
+                    <strong>Больше 1000 запросов/день</strong> → Своё железо (считайте окупаемость)
+                </div>
+                <div style="margin-top: 10px; font-size: 14px;">
+                    <strong>Правило:</strong> Если проект живёт дольше 1 года и нагрузка стабильна — своё железо чаще выгоднее аренды
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <strong>Не забудьте скрытые расходы:</strong><br>
+                Плюс 30-50% на безопасность | Плюс 30-50% на мониторинг и обновления
+            </div>
+        </div>
+
+        <!-- Слайд 5: Четыре уровня -->
+        <div class="slide">
+            <div class="slide-title">Четыре уровня работы с информацией</div>
+            <div class="slide-subtitle">От простого поиска к автономным действиям</div>
+            
+            <div style="flex: 1; overflow-y: auto;">
+                <div class="level-box">
+                    <div class="level-icon" style="background: #dbeafe;">🔍</div>
+                    <div class="level-content" style="flex: 1;">
+                        <h3>УРОВЕНЬ 1: Поиск в интернете</h3>
+                        <p><strong>«Найди актуальное»</strong><br>
+                        ИИ обращается к веб-источникам в реальном времени<br>
+                        Для новостей, курсов, событий, публичных данных<br>
+                        Когда нужен свежий ответ, а не «знания на дату обучения»<br>
+                        <strong>Не заменяет ваши внутренние данные!</strong></p>
+                    </div>
+                </div>
+
+                <div class="level-box">
+                    <div class="level-icon" style="background: #d1fae5;">📚</div>
+                    <div class="level-content" style="flex: 1;">
+                        <h3>УРОВЕНЬ 2: RAG (Retrieval-Augmented Generation)</h3>
+                        <p><strong>«Найди в МОИХ документах»</strong><br>
+                        Вы загружаете свои файлы → ИИ ищет ответы ТОЛЬКО в них, а не «придумывает»<br>
+                        Для корпоративных инструкций, договоров, переписки, личных заметок<br>
+                        Борьба с галлюцинациями: «Не знаешь — скажи "не знаю"»<br>
+                        <strong>Лайфхак для любого чата:</strong> загрузить файл + строгая инструкция «Ищи ТОЛЬКО здесь»</p>
+                    </div>
+                </div>
+
+                <div class="level-box">
+                    <div class="level-icon" style="background: #fef3c7;">🔬</div>
+                    <div class="level-content" style="flex: 1;">
+                        <h3>УРОВЕНЬ 3: Исследования</h3>
+                        <p><strong>«Найди → проанализируй → уточни → сделай вывод»</strong><br>
+                        Многошаговый поиск с ПЛАНИРОВАНИЕМ и АДАПТАЦИЕЙ<br>
+                        <strong>Это первая АГЕНТСКАЯ возможность!</strong><br>
+                        ИИ сам решает: что искать дальше, когда информации «достаточно», как структурировать ответ<br>
+                        <strong>Пример:</strong> «Подбери тур: бюджет, даты, требования — найди, сравни, порекомендуй»</p>
+                    </div>
+                </div>
+
+                <div class="level-box">
+                    <div class="level-icon" style="background: #f3e8ff;">🤖</div>
+                    <div class="level-content" style="flex: 1;">
+                        <h3>УРОВЕНЬ 4: Полноценные агенты</h3>
+                        <p><strong>«Спланируй → используй инструменты → сделай»</strong><br>
+                        ИИ не только ищет информацию, но и ВЫПОЛНЯЕТ действия через ВНЕШНИЕ ИНСТРУМЕНТЫ<br>
+                        <strong>Инструментом может быть ЛЮБАЯ программа:</strong> поиск, код, почта, Jira, Git, API, даже программа, написанная самим агентом «на лету»!<br>
+                        <strong>Из чего состоит агент:</strong> Планировщик → Диспетчер инструментов → Память → Критик<br>
+                        <strong>⚠️ Важно:</strong> Агент сам принимает решения о последовательности действий. «Доверяй, но проверяй!»</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 10px; padding: 15px;">
+                <h3>Сводная схема</h3>
+                <div style="font-size: 16px; display: flex; justify-content: space-around; align-items: center;">
+                    <span><strong>🔍 Поиск</strong><br>«Найди»</span>
+                    <span>→</span>
+                    <span><strong>📚 RAG</strong><br>«Найди в моём»</span>
+                    <span>→</span>
+                    <span><strong>🔬 Исследования</strong><br>«Найди + проанализируй»</span>
+                    <span>→</span>
+                    <span><strong>🤖 Агенты</strong><br>«Найди + сделай через инструменты»</span>
+                </div>
+                <div style="margin-top: 10px; font-size: 14px;">
+                    Чем выше уровень — тем больше автономии, но тем важнее контроль и чёткая постановка задачи
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 6: Сравнение чатов 1 -->
+        <div class="slide">
+            <div class="slide-title">Сравнение чатов: базовые функции</div>
+            <div class="slide-subtitle">Бесплатные чаты — кто даёт что без VPN и подписки</div>
+            
+            <table style="flex: 1; font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th>Модель</th>
+                        <th style="background: #10b981; color: white;">Без VPN<br><small>Работает в РФ без доп. настроек</small></th>
+                        <th style="background: #3b82f6; color: white;">Файлы<br><small>Можно загрузить документ</small></th>
+                        <th style="background: #f59e0b; color: white;">Поиск<br><small>Встроенный доступ к вебу</small></th>
+                        <th style="background: #10b981; color: white;">RAG<br><small>Загрузка СВОИХ файлов</small></th>
+                        <th style="background: #f59e0b; color: white;">Исслед.<br><small>Многошаговый поиск</small></th>
+                        <th style="background: #8b5cf6; color: white;">Ветвление<br><small>Форк диалога</small></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>DeepSeek</strong></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Qwen</strong></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Гигачат</strong></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Алиса</strong></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gemini</strong></td>
+                        <td class="center-text"><span class="badge badge-warning">⚠ Желателен</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-warning">⚠ Огранич.</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kimi</strong></td>
+                        <td class="center-text"><span class="badge badge-warning">⚠ Желателен</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>ChatGPT</strong></td>
+                        <td class="center-text"><span class="badge badge-warning">⚠ Нужен VPN</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да (VPN+)</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude</strong></td>
+                        <td class="center-text"><span class="badge badge-warning">⚠ Нужен VPN</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да (VPN+)</span></td>
+                        <td class="center-text"><span class="badge badge-no">✗ Нет</span></td>
+                        <td class="center-text"><span class="badge badge-yes">✓ Да</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="footer-note">
+                <strong>Важное уточнение:</strong> Полноценный RAG в бесплатных версиях доступен только через VPN+платно (ChatGPT GPTs, Claude Projects). 
+                Без VPN — только «загрузка файла в чат + строгая инструкция».
+            </div>
+        </div>
+
+        <!-- Слайд 7: Движки инференса -->
+        <div class="slide">
+            <div class="slide-title">Движки инференса</div>
+            <div class="slide-subtitle">Как запускать модели локально</div>
+            
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+                <div class="content-box center-text" style="background: #dbeafe; border: 2px solid #3b82f6;">
+                    <h3>🔧 ЧТО ТАКОЕ ДВИЖОК ИНФЕРЕНСА</h3>
+                    <p>Программное обеспечение для загрузки моделей и генерации предсказаний<br>
+                    Отвечает за скорость, память, оптимизацию под железо<br>
+                    <strong>Не модель — а среда для её работы</strong></p>
+                </div>
+
+                <div class="section-header orange-bg center-text">ПОПУЛЯРНЫЕ ДВИЖКИ</div>
+                <div class="grid-4">
+                    <div class="card" style="border-top: 4px solid #10b981;">
+                        <h4>Ollama</h4>
+                        <ul class="check-list" style="text-align: left; font-size: 12px;">
+                            <li>Простая установка и запуск</li>
+                            <li>Поддержка множества моделей</li>
+                            <li>Локально без интернета</li>
+                            <li>Идеален для тестов и демо</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #f59e0b;">
+                        <h4>vLLM</h4>
+                        <ul class="warning-list" style="text-align: left; font-size: 12px;">
+                            <li>Высокая производительность</li>
+                            <li>Поддержка параллельных запросов</li>
+                            <li>Оптимизирован для GPU</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #3b82f6;">
+                        <h4>TGI</h4>
+                        <ul class="check-list" style="text-align: left; font-size: 12px;">
+                            <li>Решение от HuggingFace</li>
+                            <li>Масштабируемость</li>
+                            <li>Интеграция с экосистемой HF</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="border-top: 4px solid #10b981;">
+                        <h4>LLaMA.cpp</h4>
+                        <ul class="check-list" style="text-align: left; font-size: 12px;">
+                            <li>Запуск на CPU и слабом GPU</li>
+                            <li>Квантование моделей</li>
+                            <li>Кроссплатформенность</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-header purple-bg center-text">КРИТЕРИИ ВЫБОРА ДВИЖКА</div>
+                <div class="grid-4">
+                    <div class="content-box">
+                        <ul>
+                            <li>Поддержка нужной архитектуры моделей</li>
+                            <li>Требования к памяти и скорости</li>
+                            <li>Удобство развёртывания</li>
+                            <li>Лицензионные ограничения</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section-header blue-bg center-text">💡 ПРАКТИЧЕСКИЙ СОВЕТ</div>
+                <div class="content-box">
+                    <ul class="check-list">
+                        <li><strong>Начните с Ollama для тестов</strong> → быстрый старт без настройки</li>
+                        <li><strong>Для продакшена выберите vLLM или TGI</strong> → высокая производительность и масштабируемость</li>
+                        <li><strong>Всегда тестируйте на реальных данных перед внедрением</strong> → избегайте сюрпризов в production</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 8: Промпты -->
+        <div class="slide">
+            <div class="slide-title">Промпты: продвинутые приёмы</div>
+            <div class="slide-subtitle">От цепочки рассуждений к шаблонам и логике</div>
+            
+            <div class="grid-4" style="flex: 1;">
+                <div class="content-box">
+                    <h3 class="center-text" style="color: #3b82f6;">🔗 CHAIN OF THOUGHT<br><small>Цепочка рассуждений</small></h3>
+                    <p style="font-size: 13px; margin: 10px 0;"><strong>Попросите ИИ думать шаг за шагом</strong></p>
+                    <ul style="font-size: 12px;">
+                        <li>Решите задачу пошагово</li>
+                        <li>Сначала определите переменные</li>
+                        <li>Потом сомножьте</li>
+                    </ul>
+                    <div style="background: #f1f5f9; padding: 8px; border-radius: 5px; margin-top: 10px; font-size: 12px;">
+                        <strong>Прототип:</strong> для логических и математических задач
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 class="center-text" style="color: #f59e0b;">✓ SELF-CONSISTENCY<br><small>Самопроверка</small></h3>
+                    <p style="font-size: 13px; margin: 10px 0;"><strong>Попросите решить несколькими способами и выберите consensus</strong></p>
+                    <ul style="font-size: 12px;">
+                        <li>Предложи три подхода к решению</li>
+                        <li>Оцени плюсы и минусы каждого</li>
+                        <li>Выбери оптимальный</li>
+                    </ul>
+                    <div style="background: #f1f5f9; padding: 8px; border-radius: 5px; margin-top: 10px; font-size: 12px;">
+                        <strong>Снижает ошибки</strong> и повышает надёжность
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 class="center-text" style="color: #8b5cf6;">⚙️ ReAct<br><small>Reasoning + Acting</small></h3>
+                    <p style="font-size: 13px; margin: 10px 0;"><strong>Комбинируйте рассуждение и доступ к инструментам</strong></p>
+                    <ul style="font-size: 12px;">
+                        <li>Сначала подумайте о доступных данных</li>
+                        <li>Проанализируйте, что нужно найти</li>
+                    </ul>
+                    <div style="background: #f1f5f9; padding: 8px; border-radius: 5px; margin-top: 10px; font-size: 12px;">
+                        <strong>Основа для агентов:</strong> ИИ не просто думает — но взаимодействует с окружением
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 class="center-text" style="color: #ef4444;">🚫 ОТРИЦАТЕЛЬНЫЕ ПРИМЕРЫ</h3>
+                    <p style="font-size: 13px; margin: 10px 0;"><strong>Покажите, чего делать не нужно</strong></p>
+                    <ul style="font-size: 12px;">
+                        <li>Не используйте технические термины</li>
+                        <li>Не игнорируйте данные в контексте</li>
+                    </ul>
+                    <div style="background: #f1f5f9; padding: 8px; border-radius: 5px; margin-top: 10px; font-size: 12px;">
+                        <strong>Начните с чинящих ошибок</strong>, чтобы улучшить структуру финального результата
+                    </div>
+                </div>
+
+                <div class="content-box">
+                    <h3 class="center-text" style="color: #f59e0b;">📁 ШАБЛОНЫ ПРОМПТОВ</h3>
+                    <ul style="font-size: 12px; margin-top: 10px;">
+                        <li><strong>Анализ текста:</strong><br>Роль: эксперт / критик<br>Задача: выявите риски / сильные стороны<br>Формат: таблица / JSON с полями risk, severity, mitigation</li>
+                        <li><strong>Анализ текста:</strong><br>Роль: юрист / маркетолог<br>Задача: выявите риски / сильные стороны<br>Формат: таблица / JSON</li>
+                    </ul>
+                    <div style="background: #fef3c7; padding: 8px; border-radius: 5px; margin-top: 10px; font-size: 12px;">
+                        <strong>Ограничения:</strong> не более 200 слов, без воды
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 9: Опасности агентов -->
+        <div class="slide">
+            <div class="slide-title">Опасности автономных агентов</div>
+            <div class="slide-subtitle">Когда агентная автономия становится риском</div>
+            
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 15px;">
+                <div class="section-header red-bg center-text">⚠️ ТИПИЧНЫЕ СЦЕНАРИИ СБОЕВ</div>
+                <div class="grid-4">
+                    <div class="card" style="border: 2px solid #fecaca; background: #fef2f2;">
+                        <h4 style="color: #dc2626;">🔄 Бесконечный цикл</h4>
+                        <p style="font-size: 12px;">ИИ ищет лучшую цену → поиск не завершается → новый статус → исчерпан лимит токенов</p>
+                    </div>
+                    <div class="card" style="border: 2px solid #fecaca; background: #fef2f2;">
+                        <h4 style="color: #dc2626;">🎯 Неправильная интерпретация цели</h4>
+                        <p style="font-size: 12px;">«Оптимизируй расходы» → агент отменил все подписки, включая критичные</p>
+                    </div>
+                    <div class="card" style="border: 2px solid #fecaca; background: #fef2f2;">
+                        <h4 style="color: #dc2626;">🛠️ Ошибка в инструменте</h4>
+                        <p style="font-size: 12px;">Агент написал код с багом → запустил → повредил данные / отправил не туда</p>
+                    </div>
+                    <div class="card" style="border: 2px solid #fecaca; background: #fef2f2;">
+                        <h4 style="color: #dc2626;">🤝 Конфликт агентов</h4>
+                        <p style="font-size: 12px;">Два агента пытаются изменить один документ → потеря данных / противоречия</p>
+                    </div>
+                </div>
+
+                <div class="section-header green-bg center-text">🛡️ КАК СНИЗИТЬ РИСКИ</div>
+                <div class="grid-4">
+                    <div class="card" style="border: 2px solid #86efac; background: #f0fdf4;">
+                        <h4 style="color: #16a34a;">👤 Человек в контуре</h4>
+                        <p style="font-size: 12px;">Критические действия только после подтверждения человека. Режим «предлагает → ждёт → делает»</p>
+                    </div>
+                    <div class="card" style="border: 2px solid #86efac; background: #f0fdf4;">
+                        <h4 style="color: #16a34a;">🔒 Ограничения по дизайну</h4>
+                        <p style="font-size: 12px;">Лимиты на время выполнения и число шагов. Песочница для исполнения кода. Запрет на доступ к критичным системам</p>
+                    </div>
+                    <div class="card" style="border: 2px solid #86efac; background: #f0fdf4;">
+                        <h4 style="color: #16a34a;">📝 Логирование и аудит</h4>
+                        <p style="font-size: 12px;">Полная запись всех действий агента. Возможность отката. Алерты на аномалии</p>
+                    </div>
+                    <div class="card" style="border: 2px solid #86efac; background: #f0fdf4;">
+                        <h4 style="color: #16a34a;">🧪 Тестирование с постепенным запуском</h4>
+                        <p style="font-size: 12px;">Сценарии «что если» на тестовых данных. Постепенное расширение прав агента</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="margin-top: auto;">
+                    <h3>⭐ Золотое правило</h3>
+                    <div style="display: flex; justify-content: space-around; font-size: 15px;">
+                        <span>⭐ <strong>Агент должен быть полезен, а не автономен</strong></span>
+                        <span>⭐ <strong>Начинайте с малого: пусть сначала предлагает, а не делает</strong></span>
+                        <span>⭐ <strong>Доверяй, но проверяй</strong></span>
+                    </div>
+                </div>
+
+                <div class="footer-note" style="margin-top: 10px;">
+                    <strong>Ключевое напоминание:</strong> Автономия — это не цель, а средство. Цель — надёжные рабочие процессы.
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 10: Чек-лист -->
+        <div class="slide">
+            <div class="slide-title">Чек-лист: с чего начать</div>
+            <div class="slide-subtitle">Конкретные шаги для внедрения ИИ</div>
+            
+            <div style="flex: 1; overflow-y: auto;">
+                <div class="step-box">
+                    <div class="step-number" style="background: #3b82f6;">1</div>
+                    <div class="step-content" style="flex: 1;">
+                        <h3>ШАГ 1: Определите задачу</h3>
+                        <ul>
+                            <li>Что именно должен делать ИИ</li>
+                            <li>Какой результат считается успешным</li>
+                            <li>Какие данные нужны для этого</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number" style="background: #f59e0b;">2</div>
+                    <div class="step-content" style="flex: 1;">
+                        <h3>ШАГ 2: Оцените требования</h3>
+                        <ul>
+                            <li>Безопасность и 152-ФЗ</li>
+                            <li>Объём данных: сколько запросов в день</li>
+                            <li>Бюджет на внедрение и эксплуатацию</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number" style="background: #10b981;">3</div>
+                    <div class="step-content" style="flex: 1;">
+                        <h3>ШАГ 3: Выберите способ доступа</h3>
+                        <ul>
+                            <li>Бесплатный чат для тестов</li>
+                            <li>Ollama для приватных экспериментов</li>
+                            <li>Облачный API для пилота</li>
+                            <li>Аренда на своём сервере для продакшена</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number" style="background: #8b5cf6;">4</div>
+                    <div class="step-content" style="flex: 1;">
+                        <h3>ШАГ 4: Подготовьте данные</h3>
+                        <ul>
+                            <li>Очистите и структурируйте</li>
+                            <li>Анонимизируйте персональные данные</li>
+                            <li>Подготовьте примеры для few-shot промптов</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number" style="background: #ef4444;">5</div>
+                    <div class="step-content" style="flex: 1;">
+                        <h3>ШАГ 5: Настройте промпты</h3>
+                        <ul>
+                            <li>Используйте шаблоны из лекции</li>
+                            <li>Протестируйте на реальных запросах</li>
+                            <li>Задокументируйте рабочие промпты</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number" style="background: #ec4899;">6</div>
+                    <div class="step-content" style="flex: 1;">
+                        <h3>ШАГ 6: Запустите пилот</h3>
+                        <ul>
+                            <li>Ограничьте охват приложения</li>
+                            <li>Наблюдайте за качеством ответов</li>
+                            <li>Собирайте обратную связь</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-box">
+                    <div class="step-number" style="background: #6366f1;">7</div>
+                    <div class="step-content" style="flex: 1;">
+                        <h3>ШАГ 7: Масштабируйте</h3>
+                        <ul>
+                            <li>Оптимизируйте процессы</li>
+                            <li>Автоматизируйте рутинные задачи</li>
+                            <li>Расширяйте функционал постепенно</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 10px;">
+                <h3>Ключевые метрики успеха</h3>
+                <div style="display: flex; justify-content: space-around; font-size: 14px; margin-top: 10px;">
+                    <span>❌ <strong>Качество ответов, удовлетворённость пользователей</strong></span>
+                    <span>⏱️ <strong>Скорость выполнения задачи</strong></span>
+                    <span>💰 <strong>Стоимость одного запроса</strong></span>
+                    <span>🔧 <strong>Время на поддержку и доработку</strong></span>
+                </div>
+            </div>
+
+            <div class="footer-note" style="margin-top: 10px;">
+                <strong>Помните:</strong> ИИ — это молоток.<br>
+                Им можно построить дом — а можно ударить по пальцу.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
